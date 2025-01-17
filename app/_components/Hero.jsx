@@ -2,16 +2,19 @@
 import { MessagesContext } from "@/context/MessagesContext";
 import { Globe } from "lucide-react";
 import React, { useContext, useState } from "react";
+import CustomDialog from "./CustomDialog";
+import { OverallContext } from "@/context/OverallContext";
 
 const Hero = () => {
     const [prompt, setPrompt] = useState('');
     const {messages, setMessages}=useContext(MessagesContext);
+    const {openDialog, setOpenDialog}=useContext(OverallContext);
     const handlePrompt=(input)=>{
         setMessages({
             role:'user',
             content:input
-        })
-
+        });
+        setOpenDialog(true);
     }
   return (
     <div className="bg-[#86aef8] min-h-screen flex flex-col items-center justify-center">
@@ -37,6 +40,7 @@ const Hero = () => {
         <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create quizz app on history</p>
         <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create login signup screen</p>
       </div>
+      <CustomDialog openDialog={openDialog} setOpenDialog={setOpenDialog} closeDialog={()=>setOpenDialog(false)}/>
     </div>
   );
 };
