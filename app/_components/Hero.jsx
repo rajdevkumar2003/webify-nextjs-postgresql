@@ -4,17 +4,35 @@ import { Globe } from "lucide-react";
 import React, { useContext, useState } from "react";
 import CustomDialog from "./CustomDialog";
 import { OverallContext } from "@/context/OverallContext";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { UserDetailContext } from "@/context/UserDetailContext";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
     const [prompt, setPrompt] = useState('');
     const {messages, setMessages}=useContext(MessagesContext);
+    const router=useRouter();
+    const {userDetail}=useContext(UserDetailContext);
     const {openDialog, setOpenDialog}=useContext(OverallContext);
-    const handlePrompt=(input)=>{
+    const CreateWorkspace=useMutation(api.workspace.CreateWorkspace);
+    const handlePrompt=async(input)=>{
         setMessages({
             role:'user',
             content:input
         });
-        setOpenDialog(true);
+        if(!userDetail)setOpenDialog(true);
+        else {
+          const workspaceId=await CreateWorkspace({
+            user:userDetail._id,
+            messages:[{
+              role:'user',
+              content:input
+            }]
+          });
+          console.log(workspaceId);
+          router.push('/workspace/'+workspaceId);
+        }
     }
   return (
     <div className="bg-[#86aef8] min-h-screen flex flex-col items-center justify-center">

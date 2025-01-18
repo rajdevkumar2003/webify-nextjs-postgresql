@@ -10,12 +10,10 @@ const Header = () => {
   
   const {openDialog, setOpenDialog}=useContext(OverallContext);
   const {userDetail,setUserDetail}=useContext(UserDetailContext);
-  useEffect(() => {
-    console.log(userDetail);
-  }, [])
 
   const handleLogout=()=>{
     googleLogout();
+    localStorage.clear('user');
     setOpenDialog(false);
     setUserDetail(null);
   }

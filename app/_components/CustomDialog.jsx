@@ -8,13 +8,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { v4 as uuidv4 } from 'uuid';
 import { Button } from "@/components/ui/button";
 import { LogInIcon } from "lucide-react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { UserDetailContext } from "@/context/UserDetailContext";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 const CustomDialog = ({ openDialog, setOpenDialog, closeDialog }) => {
+  const CreateUser=useMutation(api.users.createUser)
   const { userDetail, setUserDetail } = useContext(UserDetailContext);
   const googleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -25,7 +29,20 @@ const CustomDialog = ({ openDialog, setOpenDialog, closeDialog }) => {
       );
 
       console.log(userInfo);
+      const user=userInfo?.data;
+      await CreateUser({
+        name:user?.name,
+        email:user?.email,
+        picture:user?.picture,
+        uid:uuidv4()
+      });
+
+      if(typeof window!==undefined){
+        localStorage.setItem('user',JSON.stringify(user));
+      }
+
       setUserDetail(userInfo?.data);
+      closeDialog(false);
       if (userInfo) setOpenDialog(false);
     },
     onError: (errorResponse) => console.log(errorResponse),
