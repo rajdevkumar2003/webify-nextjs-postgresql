@@ -41,7 +41,7 @@ const Provider = ({ children }) => {
           <MessagesContext.Provider value={{ messages, setMessages }}>
             <div>
               <Header />
-              <div className="min-h-screen w-full">{children}</div>
+              <div className="min-h-screen w-full p-2 bg-[#86aef8]">{children}</div>
             </div>
           </MessagesContext.Provider>
         </UserDetailContext.Provider>
