@@ -38,9 +38,9 @@ const Hero = () => {
     <div className="bg-[#86aef8] min-h-screen flex flex-col items-center justify-center">
       <div className="min-h-full flex flex-col items-center justify-between">
         <h1 className="font-extrabold text-4xl md:text-6xl">
-          What do you want to build?
+          What do you want to create?
         </h1>
-        <p className="p-3 font-semibold">Prompt, run, edit, and deploy full-stack web apps.</p>
+        <p className="p-3 font-semibold">Build, test, refine, and launch full-stack web applications seamlessly.</p>
         <div className="relative flex w-full max-w-2xl min-h-52 rounded-md bg-[#86aef8] shadow-sm mt-3">
         <textarea
           value={prompt}
@@ -52,7 +52,7 @@ const Hero = () => {
         </div>
       </div>
       <div className=" text-sm w-full max-w-2xl flex items-center justify-center mt-4 capitalize flex-row flex-wrap gap-4">
-        <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> Create Todo app in react</p>
+        <p onClick={()=>handlePrompt('Create Todo app in react')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> Create Todo app in react</p>
         <p className="border p-1 rounded-xl border-black px-2 cursor-pointer">create budget track app</p>
         <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create gym management portal dashboard</p>
         <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create quizz app on history</p>

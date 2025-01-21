@@ -1,12 +1,32 @@
-import React from 'react'
+"use client";
 
+import ChatView from "@/app/_components/ChatView";
+import CodeView from "@/app/_components/CodeView";
+import { UserDetailContext } from "@/context/UserDetailContext";
+import { useRouter } from "next/navigation";
+import React, { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
 const Workspace = () => {
-  return (
-    <div className='bg-blue-400 min-h-screen grid grid-cols-1 md:grid-cols-3 gap-4 '>
-      <h1>workspace</h1>
-      <h2>client view</h2>
-    </div>
-  )
-}
+  const { userDetail } = useContext(UserDetailContext);
+  const router = useRouter();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (!userDetail?.name) {
+        toast("Oops! You are Logged Out");
+        router.push("/");
+      }
+    }, 5000);
+    return () => clearTimeout(timeout);
+  }, [userDetail]);
 
-export default Workspace
+  return (
+    <div className="p-10 ">
+      <div className=" min-h-screen grid grid-cols-1 md:grid-cols-3 gap-4">
+        <ChatView/>
+        <CodeView/>
+      </div>
+    </div>
+  );
+};
+
+export default Workspace;

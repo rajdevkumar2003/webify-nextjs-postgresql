@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { OverallContext } from "@/context/OverallContext";
 import { api } from "@/convex/_generated/api";
 import { useConvex } from "convex/react";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Provider = ({ children }) => {
   const convex=useConvex();
@@ -14,7 +15,7 @@ const Provider = ({ children }) => {
        IsAuthenticated();
   },[]);
   
-  const [messages, setMessages] = useState({ role: "", content: "" });
+  const [messages, setMessages] = useState();
   const [userDetail, setUserDetail] = useState();
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -43,6 +44,7 @@ const Provider = ({ children }) => {
               <Header />
               <div className="min-h-screen w-full p-2 bg-[#86aef8]">{children}</div>
             </div>
+            <ToastContainer />
           </MessagesContext.Provider>
         </UserDetailContext.Provider>
       </OverallContext.Provider>
