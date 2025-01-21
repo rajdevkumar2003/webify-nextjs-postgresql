@@ -64,14 +64,15 @@ const ChatView = () => {
   return (
     <div>
       <div className="bg-[#7aa4f3] h-[85vh] rounded-md p-1 flex flex-col">
+        <h1 className="font-bold text-[3vh] text-blue-900 shadow-sm p-1">Webify Assistant</h1>
         <div className="flex-1 overflow-y-scroll scrollbar-hide">
-           {messages?.map((msg,index)=>(
+           {messages?.length>0&&messages.map((msg,index)=>(
               <div key={index} className="flex gap-2 w-full items-center justify-start  bg-[#688ccf]  rounded-sm shadow-sm mb-1">
                 {msg?.role=='user'?
                     <div key={index} className="flex gap-2 items-center w-full justify-start bg-[#7593ca] p-1 rounded-sm ">
                 <Image
                     className="rounded-full sm:h-[40px] sm:w-[40px]"
-                    src={userDetail?.picture}
+                    src={userDetail?.picture||'/profile.png'}
                     height={20}
                     width={20}
                     alt="hero"
@@ -90,7 +91,7 @@ const ChatView = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Enter your prompt"
-            className="resize-none shadow-sm px-4 bg-[#b0c7f3] border-none outline-none rounded-md w-full max-w-2xl min-h-52 p-2"
+            className="resize-none shadow-sm px-4 bg-[#b0c7f3] border-none outline-none rounded-md w-full max-w-2xl min-h-50 p-2"
           />
           <Globe
              onClick={() => handlePrompt(prompt)}

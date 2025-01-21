@@ -15,7 +15,7 @@ const Provider = ({ children }) => {
        IsAuthenticated();
   },[]);
   
-  const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState([]);
   const [userDetail, setUserDetail] = useState();
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -30,7 +30,6 @@ const Provider = ({ children }) => {
         console.log(result);
       }
       else console.log('cache is empty')
-      
     }
   }
   return (

@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 const Hero = () => {
     const [prompt, setPrompt] = useState('');
-    const {messages, setMessages}=useContext(MessagesContext);
+    const {setMessages}=useContext(MessagesContext);
     const router=useRouter();
     const {userDetail}=useContext(UserDetailContext);
     const {openDialog, setOpenDialog}=useContext(OverallContext);
@@ -21,7 +21,7 @@ const Hero = () => {
             role:'user',
             content:input
         });
-        if(!userDetail)setOpenDialog(true);
+        if(!userDetail|| !userDetail._id)setOpenDialog(true);
         else {
           const workspaceId=await CreateWorkspace({
             user:userDetail._id,
