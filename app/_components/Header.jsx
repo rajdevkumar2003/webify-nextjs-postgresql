@@ -5,6 +5,7 @@ import { LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import { googleLogout } from '@react-oauth/google';
 import React, { useContext, useEffect } from "react";
+import Link from "next/link";
 
 const Header = () => {
   
@@ -19,12 +20,17 @@ const Header = () => {
   }
   return (
     <div className="flex flex-row justify-between p-4 bg-[#6495ED]">
+      <div className="flex gap-2 items-center">
       <Image 
         src="/logo.svg"
         width={40}
         height={40}
         alt="logo"
       />
+      <Link href={'/'}>
+      <span className="font-bold text-blue-950 font-sans text-[2.5vh]">WEBIFY</span>
+      </Link>
+      </div>
       <div className="flex flex-row justify-between gap-6">
         {!userDetail
         ?<Button onClick={()=>setOpenDialog(true)} variant="ghost" className="bg-blue-300">Sign In</Button>

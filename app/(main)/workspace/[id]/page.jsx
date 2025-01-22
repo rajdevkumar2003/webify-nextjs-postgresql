@@ -20,8 +20,8 @@ const Workspace = () => {
   }, [userDetail]);
 
   return (
-    <div className="p-4">
-      <div className=" grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="p-4 min-h-[100vh]">
+      <div className=" flex max-md:flex-col gap-4 justify-start min-h-[100vh]">
         <ChatView/>
         <CodeView/>
       </div>

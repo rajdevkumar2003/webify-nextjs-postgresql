@@ -53,10 +53,10 @@ const Hero = () => {
       </div>
       <div className=" text-sm w-full max-w-2xl flex items-center justify-center mt-4 capitalize flex-row flex-wrap gap-4">
         <p onClick={()=>handlePrompt('Create Todo app in react')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> Create Todo app in react</p>
-        <p className="border p-1 rounded-xl border-black px-2 cursor-pointer">create budget track app</p>
-        <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create gym management portal dashboard</p>
-        <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create quizz app on history</p>
-        <p className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create login signup screen</p>
+        <p onClick={()=>handlePrompt('create budget track app')} className="border p-1 rounded-xl border-black px-2 cursor-pointer">create budget track app</p>
+        <p onClick={()=>handlePrompt('create gym management portal dashboard')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create gym management portal dashboard</p>
+        <p onClick={()=>handlePrompt('create quizz app on history')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create quizz app on history</p>
+        <p onClick={()=>handlePrompt('create login signup screen')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create login signup screen</p>
       </div>
       <CustomDialog openDialog={openDialog} setOpenDialog={setOpenDialog} closeDialog={()=>setOpenDialog(false)}/>
     </div>
