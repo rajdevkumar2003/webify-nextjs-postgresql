@@ -13,12 +13,31 @@ import axios from "axios";
 import { MessagesContext } from "@/context/MessagesContext";
 import prompts from "@/connects/prompts";
 import { LoaderPinwheel } from "lucide-react";
+import { useConvex, useMutation } from "convex/react";
+import { UpdateFiles } from "@/convex/workspace";
+import { useParams } from "next/navigation";
+import { api } from "@/convex/_generated/api";
 const CodeView = () => {
   const [files, setFiles] = useState(constants?.DEFAULT_FILE);
   const [active, setActive] = useState("code");
   const { messages } = useContext(MessagesContext);
   const [codeGenerate, setCodeGenerate] = useState(false);
+  
+  const UpdateFile=useMutation(api.workspace.UpdateFiles);
+  const {id}=useParams();
+  const convex=useConvex();
 
+  useEffect(()=>{
+    id&&GetFiles();
+  },[id]);
+
+  const GetFiles=async()=>{
+    const result=await convex.query(api.workspace.GetWorkspace,{
+      workspaceId:id
+    });
+    const mergedFiles = { ...constants?.DEFAULT_FILE, ...result?.fileData };
+    setFiles(mergedFiles);
+  }
   useEffect(() => {
     if (messages?.length > 0) {
       const role = messages[messages?.length - 1].role;
@@ -40,6 +59,10 @@ const CodeView = () => {
 
     const mergedFiles = { ...constants?.DEFAULT_FILE, ...aiResp?.files };
     setFiles(mergedFiles);
+    await UpdateFile({
+      workspaceId:id,
+      files:aiResp.files
+    })
     setCodeGenerate(false);
   };
 

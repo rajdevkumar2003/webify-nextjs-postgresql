@@ -8,6 +8,7 @@ import { OverallContext } from "@/context/OverallContext";
 import { api } from "@/convex/_generated/api";
 import { useConvex } from "convex/react";
 import { ToastContainer, toast } from 'react-toastify';
+import Footer from "./_components/Footer";
 
 const Provider = ({ children }) => {
   const convex=useConvex();
@@ -41,7 +42,8 @@ const Provider = ({ children }) => {
           <MessagesContext.Provider value={{ messages, setMessages }}>
             <div>
               <Header />
-              <div className="min-h-screen w-full p-2 bg-[#86aef8]">{children}</div>
+              <div className="min-h-screen w-full  bg-[#86aef8]">{children}</div>
+              <Footer/>
             </div>
             <ToastContainer />
           </MessagesContext.Provider>

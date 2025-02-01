@@ -6,9 +6,10 @@ import Image from "next/image";
 import { googleLogout } from '@react-oauth/google';
 import React, { useContext, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  
+  const router=useRouter();
   const {openDialog, setOpenDialog}=useContext(OverallContext);
   const {userDetail,setUserDetail}=useContext(UserDetailContext);
 
@@ -36,7 +37,7 @@ const Header = () => {
         ?<Button onClick={()=>setOpenDialog(true)} variant="ghost" className="bg-blue-300">Sign In</Button>
         :<Button onClick={handleLogout} variant="ghost" className="bg-blue-300">LogOut <LogOutIcon/> </Button>
         }
-        <Button className=" bg-blue-800">Get Started</Button>
+        <Button onClick={()=>router.push('/upcoming-update')} className=" bg-blue-800">Upcoming?</Button>
       </div>
     </div>
   );
