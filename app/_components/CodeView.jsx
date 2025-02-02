@@ -23,7 +23,7 @@ const CodeView = () => {
   const { messages } = useContext(MessagesContext);
   const [codeGenerate, setCodeGenerate] = useState(false);
   
-  const UpdateFile=useMutation(api.workspace.UpdateFiles);
+  const UpdateFile=useMutation(api.workspace?.UpdateFiles);
   const {id}=useParams();
   const convex=useConvex();
 
@@ -61,7 +61,7 @@ const CodeView = () => {
     setFiles(mergedFiles);
     await UpdateFile({
       workspaceId:id,
-      files:aiResp.files
+      files:aiResp?.files
     })
     setCodeGenerate(false);
   };

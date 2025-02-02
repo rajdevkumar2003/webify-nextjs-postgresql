@@ -1,6 +1,6 @@
 "use client"
 import { MessagesContext } from "@/context/MessagesContext";
-import { Globe } from "lucide-react";
+import { Globe, Mic } from "lucide-react";
 import React, { useContext, useState } from "react";
 import CustomDialog from "./CustomDialog";
 import { OverallContext } from "@/context/OverallContext";
@@ -9,13 +9,16 @@ import { api } from "@/convex/_generated/api";
 import { UserDetailContext } from "@/context/UserDetailContext";
 import { useRouter } from "next/navigation";
 
+
 const Hero = () => {
+    const [mic, setMic] = useState(false);
     const [prompt, setPrompt] = useState('');
     const {setMessages}=useContext(MessagesContext);
     const router=useRouter();
     const {userDetail}=useContext(UserDetailContext);
     const {openDialog, setOpenDialog}=useContext(OverallContext);
     const CreateWorkspace=useMutation(api.workspace.CreateWorkspace);
+
     const handlePrompt=async(input)=>{
         setMessages({
             role:'user',
@@ -34,8 +37,9 @@ const Hero = () => {
           router.push('/workspace/'+workspaceId);
         }
     }
+
   return (
-    <div className="bg-[#86aef8] min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-[#86aef8] min-h-screen flex flex-col items-center justify-center p-2">
       <div className="min-h-full flex flex-col items-center justify-between">
         <h1 className="font-extrabold text-4xl md:text-6xl">
           What do you want to create?
@@ -59,6 +63,8 @@ const Hero = () => {
         <p onClick={()=>handlePrompt('create login signup screen')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create login signup screen</p>
       </div>
       <CustomDialog openDialog={openDialog} setOpenDialog={setOpenDialog} closeDialog={()=>setOpenDialog(false)}/>
+      <Mic onClick={()=>router.push('/upcoming-update')} className="mt-10 rounded-full h-14 w-14 bg-blue-700 text-gray-200 p-2 shadow-md cursor-pointer"
+      />
     </div>
   );
 };
