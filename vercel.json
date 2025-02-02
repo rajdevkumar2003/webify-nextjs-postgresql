@@ -1,7 +1,7 @@
 {
     "version": 2,
     "functions": {
-      "api/generate": {
+      "api/gen-ai-code": {
         "maxDuration": 60
       }
     }
