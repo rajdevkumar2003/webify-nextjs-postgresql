@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "functions": {
+      "api/gen-ai-code/route.js": {
+        "maxDuration": 60
+      }
+    }
+  }
