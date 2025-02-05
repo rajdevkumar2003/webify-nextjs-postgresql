@@ -8,6 +8,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { UserDetailContext } from "@/context/UserDetailContext";
 import { useRouter } from "next/navigation";
+import Microphone from "./Microphone";
 
 
 const Hero = () => {
@@ -63,8 +64,7 @@ const Hero = () => {
         <p onClick={()=>handlePrompt('create login signup screen')} className="border p-1 rounded-xl border-black px-2 cursor-pointer"> create login signup screen</p>
       </div>
       <CustomDialog openDialog={openDialog} setOpenDialog={setOpenDialog} closeDialog={()=>setOpenDialog(false)}/>
-      <Mic onClick={()=>router.push('/upcoming-update')} className="mt-10 rounded-full h-14 w-14 bg-blue-700 text-gray-200 p-2 shadow-md cursor-pointer"
-      />
+      <Microphone prompt={prompt} setPrompt={setPrompt}/>
     </div>
   );
 };
