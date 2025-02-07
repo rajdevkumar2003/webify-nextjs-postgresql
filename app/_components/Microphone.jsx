@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import { Mic } from "lucide-react";
 import React, { useEffect } from "react";
 import useSpeechToText from "react-hook-speech-to-text";
@@ -17,9 +18,6 @@ const Microphone = ({ prompt, setPrompt }) => {
     continuous: true,
     useLegacyResults: false,
   });
-  if (error) {
-    alert(error.message);
-  }
 
   useEffect(() => {
 
