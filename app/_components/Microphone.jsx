@@ -3,10 +3,7 @@
 import { Mic } from "lucide-react";
 import React, { useEffect } from "react";
 import useSpeechToText from "react-hook-speech-to-text";
-import { useContext } from "react";
-import { MessagesContext } from "@/context/MessagesContext";
 const Microphone = ({ prompt, setPrompt }) => {
-  const { messages, setMessages } = useContext(MessagesContext);
   const {
     error,
     interimResult,
@@ -29,10 +26,14 @@ const Microphone = ({ prompt, setPrompt }) => {
 
   const startFunc = () =>{
     setPrompt('');
-    startSpeechToText();
+    if (typeof window !== "undefined") {
+      startSpeechToText();
+    }
   }
   const stopFunc = () =>{
-    stopSpeechToText();
+    if (typeof window !== "undefined") {
+      stopSpeechToText();
+    }
   }
 
   return (
