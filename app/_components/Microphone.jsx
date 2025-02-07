@@ -1,9 +1,11 @@
-"use client"
+"use client";
 
 import { Mic } from "lucide-react";
 import React, { useEffect } from "react";
 import useSpeechToText from "react-hook-speech-to-text";
-const Microphone = ({ prompt, setPrompt }) => {
+import dynamic from "next/dynamic";
+
+const MicrophoneComponent = ({ prompt, setPrompt }) => {
   const {
     error,
     interimResult,
@@ -17,24 +19,23 @@ const Microphone = ({ prompt, setPrompt }) => {
   });
 
   useEffect(() => {
-
-    results.map((text) => {
-    setPrompt((prev) => prev + text?.transcript);
+    results.forEach((text) => {
+      setPrompt((prev) => prev + text?.transcript);
     });
+  }, [results, setPrompt]);
 
-  }, [isRecording]);
-
-  const startFunc = () =>{
-    setPrompt('');
+  const startFunc = () => {
+    setPrompt("");
     if (typeof window !== "undefined") {
       startSpeechToText();
     }
-  }
-  const stopFunc = () =>{
+  };
+
+  const stopFunc = () => {
     if (typeof window !== "undefined") {
       stopSpeechToText();
     }
-  }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center gap-3">
@@ -50,5 +51,8 @@ const Microphone = ({ prompt, setPrompt }) => {
     </div>
   );
 };
+
+// Correct way: Use a named component and wrap it with `dynamic()`
+const Microphone = dynamic(() => Promise.resolve(MicrophoneComponent), { ssr: false });
 
 export default Microphone;
